@@ -41,25 +41,25 @@ def greet_person():
                            person=player,
                            compliment=compliment)
 
-@app.route('/game')
+@app.route('/game', methods = ['POST'])
 def show_madlib_form():
     """get user response to game proposition"""
-    answer = request.args.get("yes_game")
+    answer = request.form.get("yes_game")
     
     if answer == "yes":
         return render_template("game.html")
     else:
         return render_template("goodbye.html")
     
-@app.route('/madlib')
+@app.route('/madlib', methods = ['POST'])
 def show_madlib():
     """get user input for madlib"""
-    person = request.args.get("person")
-    color = request.args.get("color")
-    noun = request.args.get("noun")
-    adjective = request.args.get("adjective")
-    noun_2 = request.args.get("noun_2")
-    plural_noun = request.args.get("plural_noun")
+    person = request.form.get("person")
+    color = request.form.get("color")
+    noun = request.form.get("noun")
+    adjective = request.form.get("adjective")
+    noun_2 = request.form.get("noun_2")
+    plural_noun = request.form.get("plural_noun")
     poem = choice(["madlib.html", "mad_lib2.html"])
 
     return render_template(poem, person = person, color=color, noun=noun, adjective=adjective, noun_2=noun_2, plural_noun=plural_noun)
